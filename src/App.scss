@@ -1,0 +1,134 @@
+html {
+  background-color: #F9F9F9;
+}
+
+.App {
+  height: 100vh;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  width: 300px;
+  background-color: #fff;
+  padding: 30px 15px;
+  font-size: 14px;
+  color: #747474;
+  border-radius: 4px;
+
+  &__button {
+    height: 40px;
+    background-color: #3A3D4B;
+    border: 0;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+  }
+}
+
+.inputContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+
+  &__label {
+    align-self: flex-start;
+  }
+
+  &__input {
+    border: 2px solid #EFF0F4;
+    padding: 7px 5px;
+    outline: none;
+    color: #90949B;
+    border-radius: 4px;
+
+    &_error {
+      border-color: red;
+      border-width: 1px;
+    }
+  }
+
+}
+
+.checkBoxContainer {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+
+  /*Empty checkbox*/
+  &__checkbox {
+    background: green;
+  }
+
+  /*Checked checkbox*/
+  &__checkbox:checked {
+    background: red;
+    color: white;
+  }
+}
+
+.passwordContainer {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  &__field {
+    padding-right: 30px;
+  }
+
+  &__icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 10px;
+  }
+}
+
+.error-message {
+  font-size: 10px;
+  align-self: flex-start;
+  text-align: start;
+  color: red;
+}
+
+.loginCheckbox {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.loginCheckbox+label {
+  display: inline-flex;
+  align-items: center;
+  user-select: none;
+}
+
+.loginCheckbox:checked+label::before {
+  background-color: #3A3D4B;
+  border-color: #3A3D4B;
+  color: #fff;
+  background-image: url('/assets/checkIcon.svg');
+  background-size: cover;
+  background-position: center center;
+}
+
+.loginCheckbox+label::before {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 1px solid #adb5bd;
+  border-radius: 2px;
+  margin-right: 0.5em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+}
