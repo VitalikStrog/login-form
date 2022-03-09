@@ -1,4 +1,9 @@
 html {
+  font-family: SF Pro Text, sans-serif;
+  font-size: 14px;
+  line-height: 22px;
+  font-style: normal;
+  font-weight: normal;
   background-color: #F9F9F9;
 }
 
@@ -10,16 +15,20 @@ html {
   align-items: center;
 }
 
-.loginForm {
+.formContainer {
   display: flex;
   flex-direction: column;
   gap: 22px;
-  width: 300px;
   background-color: #fff;
   padding: 30px 15px;
   font-size: 14px;
   color: #747474;
   border-radius: 4px;
+
+  &__title {
+    font-size: 24px;
+    color: #000;
+  }
 
   &__button {
     height: 40px;
@@ -28,6 +37,8 @@ html {
     border-radius: 4px;
     color: #fff;
     cursor: pointer;
+    font-size: 16px;
+    line-height: 24px;
   }
 }
 
@@ -39,6 +50,8 @@ html {
 
   &__label {
     align-self: flex-start;
+    font-size: 14px;
+    line-height: 22px;
   }
 
   &__input {
@@ -48,29 +61,17 @@ html {
     color: #90949B;
     border-radius: 4px;
 
+    &::placeholder {
+      font-size: 16px;
+      line-height: 24px;
+    }
+
     &_error {
       border-color: red;
       border-width: 1px;
     }
   }
 
-}
-
-.checkBoxContainer {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-
-  /*Empty checkbox*/
-  &__checkbox {
-    background: green;
-  }
-
-  /*Checked checkbox*/
-  &__checkbox:checked {
-    background: red;
-    color: white;
-  }
 }
 
 .passwordContainer {
@@ -97,6 +98,12 @@ html {
   color: red;
 }
 
+.checkBoxContainer {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
 .loginCheckbox {
   position: absolute;
   z-index: -1;
@@ -113,7 +120,7 @@ html {
   background-color: #3A3D4B;
   border-color: #3A3D4B;
   color: #fff;
-  background-image: url('/assets/checkIcon.svg');
+  background-image: url('../images/checkIcon.svg');
   background-size: cover;
   background-position: center center;
 }
@@ -131,4 +138,48 @@ html {
   background-repeat: no-repeat;
   background-position: center center;
   background-size: 50% 50%;
+}
+
+.buttonGroup {
+  &__button {
+    display: block;
+    padding: 5px 10px;
+    border: 1px solid #3A3D4B;
+    border-radius: 2px;
+    color: #000;
+    text-decoration: none;
+  }
+}
+
+.profile-type {
+  display: flex;
+  gap: 10px;
+
+  &__container {
+    display: flex;
+    align-items: center;
+  }
+
+  &__radio {
+    margin: 0 5px 0 0;
+  }
+}
+
+.homePage {
+  font-size: 25px;
+
+  &__nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  &__button {
+    font-size: 20px;
+    height: max-content;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 5px 10px;
+  }
 }
