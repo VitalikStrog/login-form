@@ -1,5 +1,6 @@
 {
   "name": "test-app",
+  "homepage": "https://vitalikstrog.github.io/login-form",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

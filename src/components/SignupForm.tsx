@@ -113,7 +113,7 @@ export const SignupForm: React.FC = () => {
         Sign up
       </button>
 
-      <SocialMedias formLink={"/login"}/>
+      <SocialMedias formLink={"/login-form/login"}/>
     </form>
   );
 };
