@@ -1,14 +1,10 @@
-import React, { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import React from "react";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import classNames from 'classnames';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faEyeSlash,
-  faEye,
-} from "@fortawesome/free-solid-svg-icons";
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import {SocialMedias} from "./SocialMedias";
+import { Form, Input } from "antd";
 
 interface LoginFormState {
   email: string;
@@ -25,8 +21,7 @@ const schema = yup.object({
 }).required();
 
 export const LoginForm: React.FC = (): JSX.Element => {
-  const [isPasswordVisible, setPasswordVisible] = useState<boolean>(false);
-  const { register, formState: { errors }, handleSubmit } = useForm<LoginFormState>({
+  const { register, formState: { errors }, handleSubmit, control } = useForm<LoginFormState>({
     mode: 'onSubmit',
     reValidateMode: 'onChange',
     resolver: yupResolver(schema)
@@ -34,46 +29,49 @@ export const LoginForm: React.FC = (): JSX.Element => {
   const onSubmit: SubmitHandler<LoginFormState> = data => { console.log(data); };
 
   return (
-    <form
+    <Form
       className="formContainer"
-      onSubmit={handleSubmit(onSubmit)}
+      onFinish={handleSubmit(onSubmit)}
     >
       <h2 className="formContainer__title">Log in</h2>
-      <label className="formContainer__inputContainer inputContainer">
+      <div className="formContainer__inputContainer inputContainer">
         <span className="inputContainer__label">Email</span>
-        <input
-          className={classNames(
-            'inputContainer__input',
-            {'inputContainer__input_error': !!errors.email },
+        <Controller
+          name="email"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <Input
+              {...field}
+              type="email"
+              size="large"
+              placeholder="Enter email"
+              status={errors.email && 'error'}
+            />
           )}
-          type="email"
-          placeholder="Enter email"
-          {...register("email")}
         />
         {errors.email && <span className="error-message">{errors.email.message}</span>}
-      </label>
+      </div>
 
-      <label className="formContainer__inputContainer inputContainer">
+      <div className="formContainer__inputContainer inputContainer">
         <span className="inputContainer__label">Password</span>
-        <div className="passwordContainer">
-          <input
-            className={classNames(
-              'inputContainer__input',
-              'passwordContainer__field',
-              {'inputContainer__input_error': !!errors.password },
-            )}
-            type={isPasswordVisible ? "text" : "password"}
-            placeholder="Enter password"
-            {...register("password")}
-          />
-          <FontAwesomeIcon
-            icon={isPasswordVisible ? faEyeSlash : faEye}
-            onClick={() => setPasswordVisible(prevState => !prevState)}
-            className="passwordContainer__icon"
-          />
-        </div>
+        <Controller
+          name="password"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <Input.Password
+              {...field}
+              type="password"
+              size="large"
+              placeholder="Enter password"
+              status={errors.password && 'error'}
+              iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+            />
+          )}
+        />
         {errors.password && <span className="error-message">{errors.password.message}</span>}
-      </label>
+      </div>
 
       <div className="checkBoxContainer">
         <input
@@ -94,6 +92,6 @@ export const LoginForm: React.FC = (): JSX.Element => {
       </button>
 
       <SocialMedias formLink={"/login-form/sign-up"} />
-    </form>
+    </Form>
   );
 };

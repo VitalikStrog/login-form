@@ -4,7 +4,6 @@ html {
   line-height: 22px;
   font-style: normal;
   font-weight: normal;
-  background-color: #F9F9F9;
 }
 
 .App {
@@ -13,6 +12,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #F9F9F9;
 }
 
 .formContainer {
@@ -52,42 +52,6 @@ html {
     align-self: flex-start;
     font-size: 14px;
     line-height: 22px;
-  }
-
-  &__input {
-    border: 2px solid #EFF0F4;
-    padding: 7px 5px;
-    outline: none;
-    color: #90949B;
-    border-radius: 4px;
-
-    &::placeholder {
-      font-size: 16px;
-      line-height: 24px;
-    }
-
-    &_error {
-      border-color: red;
-      border-width: 1px;
-    }
-  }
-
-}
-
-.passwordContainer {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-
-  &__field {
-    padding-right: 30px;
-  }
-
-  &__icon {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 10px;
   }
 }
 

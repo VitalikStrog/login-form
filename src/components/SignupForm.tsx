@@ -1,11 +1,10 @@
-import React, { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import React from "react";
+import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import classNames from 'classnames';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEye, faEyeSlash} from "@fortawesome/free-solid-svg-icons";
-import {SocialMedias} from "./SocialMedias";
+import { SocialMedias } from "./SocialMedias";
+import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
+import { Form, Input } from "antd";
 
 interface SignupFormState {
   profileType: string;
@@ -24,8 +23,7 @@ const schema = yup.object({
 }).required();
 
 export const SignupForm: React.FC = () => {
-  const [isPasswordVisible, setPasswordVisible] = useState<boolean>(false);
-  const { register, formState: { errors }, handleSubmit } = useForm<SignupFormState>({
+  const { register, formState: { errors }, handleSubmit, control } = useForm<SignupFormState>({
     mode: 'onSubmit',
     reValidateMode: 'onChange',
     resolver: yupResolver(schema),
@@ -33,9 +31,9 @@ export const SignupForm: React.FC = () => {
   const onSubmit: SubmitHandler<SignupFormState> = data => { console.log(data); };
 
   return (
-    <form
+    <Form
       className="formContainer"
-      onSubmit={handleSubmit(onSubmit)}
+      onFinish={handleSubmit(onSubmit)}
     >
       <h1 className="formContainer__title">Sign up</h1>
       <div className="formContainer__profile-type profile-type">
@@ -59,53 +57,61 @@ export const SignupForm: React.FC = () => {
           <span>Tour company</span>
         </label>
       </div>
-      <label className="formContainer__inputContainer inputContainer">
+      <div className="formContainer__inputContainer inputContainer">
         <span className="inputContainer__label">Full name</span>
-        <input
-          className={classNames(
-            'inputContainer__input',
-            {'inputContainer__input_error': !!errors.fullName },
+        <Controller
+          name="fullName"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <Input
+              {...field}
+              type="password"
+              size="large"
+              placeholder="Enter full name"
+              status={errors.fullName && 'error'}
+            />
           )}
-          type="text"
-          placeholder="Enter full name"
-          {...register("fullName")}
         />
         {errors.fullName && <span className="error-message">{errors.fullName.message}</span>}
-      </label>
-      <label className="formContainer__inputContainer inputContainer">
+      </div>
+      <div className="formContainer__inputContainer inputContainer">
         <span className="inputContainer__label">Email</span>
-        <input
-          className={classNames(
-            'inputContainer__input',
-            {'inputContainer__input_error': !!errors.email },
+        <Controller
+          name="email"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <Input
+              {...field}
+              type="email"
+              size="large"
+              placeholder="Enter email"
+              status={errors.email && 'error'}
+            />
           )}
-          type="email"
-          placeholder="Enter email"
-          {...register("email")}
         />
         {errors.email && <span className="error-message">{errors.email.message}</span>}
-      </label>
-      <label className="formContainer__inputContainer inputContainer">
+      </div>
+      <div className="formContainer__inputContainer inputContainer">
         <span className="inputContainer__label">Password</span>
-        <div className="passwordContainer">
-          <input
-            className={classNames(
-              'inputContainer__input',
-              'passwordContainer__field',
-              {'inputContainer__input_error': !!errors.password },
-            )}
-            type={isPasswordVisible ? "text" : "password"}
-            placeholder="Enter password"
-            {...register("password")}
-          />
-          <FontAwesomeIcon
-            icon={isPasswordVisible ? faEyeSlash : faEye}
-            onClick={() => setPasswordVisible(prevState => !prevState)}
-            className="passwordContainer__icon"
-          />
-        </div>
+        <Controller
+          name="password"
+          control={control}
+          defaultValue=""
+          render={({ field }) => (
+            <Input.Password
+              {...field}
+              type="password"
+              size="large"
+              placeholder="Enter password"
+              status={errors.password && 'error'}
+              iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
+            />
+          )}
+        />
         {errors.password && <span className="error-message">{errors.password.message}</span>}
-      </label>
+      </div>
       <button
         type="submit"
         className="formContainer__button"
@@ -114,6 +120,6 @@ export const SignupForm: React.FC = () => {
       </button>
 
       <SocialMedias formLink={"/login-form/login"}/>
-    </form>
+    </Form>
   );
 };
