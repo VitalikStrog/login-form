@@ -91,7 +91,7 @@ export const LoginForm: React.FC = (): JSX.Element => {
         Log in
       </button>
 
-      <SocialMedias formLink={"/login-form/sign-up"} />
+      <SocialMedias formLink={"/sign-up"} />
     </Form>
   );
 };

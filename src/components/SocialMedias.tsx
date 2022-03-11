@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 interface SocialMediasProps {
-  formLink: '/login-form/login' | '/login-form/sign-up';
+  formLink: '/login' | '/sign-up';
 }
 
 export const SocialMedias: React.FC<SocialMediasProps> = ({ formLink }) => {
@@ -29,13 +29,13 @@ export const SocialMedias: React.FC<SocialMediasProps> = ({ formLink }) => {
         ))}
       </div>
       <span>
-        {formLink === '/login-form/sign-up' && `Don't have an account? `}
-        {formLink === '/login-form/login' && `Already have an account? `}
+        {formLink === '/sign-up' && `Don't have an account? `}
+        {formLink === '/login' && `Already have an account? `}
         <Link
           to={formLink}
           className="socialMediaContainer__link">
-          {formLink === '/login-form/login' && 'Log in'}
-          {formLink === '/login-form/sign-up' && 'Sign up'}
+          {formLink === '/login' && 'Log in'}
+          {formLink === '/sign-up' && 'Sign up'}
         </Link>
       </span>
     </div>

@@ -6,13 +6,13 @@ export const HomePage: React.FC = () => (
     <h1 className="homePage__title">Home page</h1>
     <div className="homePage__nav">
       <NavLink
-        to="/login-form/login"
+        to="/login"
         className="formContainer__button homePage__button"
       >
         Login
       </NavLink>
       <NavLink
-        to="/login-form/sign-up"
+        to="/sign-up"
         className="formContainer__button homePage__button"
       >
         Sign up
