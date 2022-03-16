@@ -3,8 +3,9 @@ import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-import {SocialMedias} from "./SocialMedias";
+import { SocialMedias } from "./SocialMedias";
 import { Form, Input } from "antd";
+import { Link } from "react-router-dom";
 
 interface LoginFormState {
   email: string;
@@ -24,13 +25,13 @@ export const LoginForm: React.FC = (): JSX.Element => {
   const { register, formState: { errors }, handleSubmit, control } = useForm<LoginFormState>({
     mode: 'onSubmit',
     reValidateMode: 'onChange',
-    resolver: yupResolver(schema)
+    resolver: yupResolver(schema),
   });
   const onSubmit: SubmitHandler<LoginFormState> = data => { console.log(data); };
 
   return (
     <Form
-      className="formContainer"
+      className="formContainer formContainer__recovery"
       onFinish={handleSubmit(onSubmit)}
     >
       <h2 className="formContainer__title">Log in</h2>
@@ -71,6 +72,9 @@ export const LoginForm: React.FC = (): JSX.Element => {
           )}
         />
         {errors.password && <span className="error-message">{errors.password.message}</span>}
+        <span className="inputContainer__label">
+          <Link to="/forgot-password">Forgot password?</Link>
+        </span>
       </div>
 
       <div className="checkBoxContainer">
